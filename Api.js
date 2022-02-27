@@ -1,9 +1,10 @@
-/* Preloading Results */
+// /* Preloading Results */
 const inputFeild = document.getElementById('inputFeild');
 const input = inputFeild.value;
+
+
 // console.log(input)
 inputFeild.value = "";
-
 
 const url = `https://themealdb.com/api/json/v1/1/search.php?s=${input}`;
 fetch(url)
@@ -14,10 +15,10 @@ fetch(url)
 const displaySearchResult = meals => {
     const searchResult = document.getElementById('search-result');
     searchResult.innerHTML = '';
+    // searchResult.textContent = '';
     if (meals.length == 0) {
         alert("No Result Found")
     }
-    // searchResult.textContent = '';
     meals.forEach(meal => {
         // console.log(meal)
         const div = document.createElement('div');
@@ -42,11 +43,20 @@ const displaySearchResult = meals => {
 
 
 /* load search by cliking search button  */
+
+
+
+
+
+
 const loadSearch = () => {
+    document.getElementById('spinner').style.display = "block";
     const inputFeild = document.getElementById('inputFeild');
     const input = inputFeild.value;
     // console.log(input)
     inputFeild.value = "";
+
+
 
 
     const url = `https://themealdb.com/api/json/v1/1/search.php?s=${input}`;
@@ -55,17 +65,23 @@ const loadSearch = () => {
         .then(data => displaySearchResult(data.meals))
 
 
+
     const displaySearchResult = meals => {
+        document.getElementById('spinner').style.display = "none";
+
+
+        // spinner('block')
         const searchResult = document.getElementById('search-result');
         searchResult.innerHTML = '';
+
+
+
         if (meals.length == 0) {
             alert("No Result Found")
         }
         // searchResult.textContent = '';
         meals.forEach(meal => {
             // console.log(meal)
-
-
             const div = document.createElement('div');
             div.className = "col";
             div.innerHTML = `<div class="col">
@@ -85,6 +101,9 @@ const loadSearch = () => {
     }
 
 }
+
+
+
 const loadMealDetaile = mealId => {
     const url = `https://themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
     fetch(url)
@@ -109,3 +128,8 @@ const displayMealDetail = meal => {
 
     mealDetails.appendChild(div);
 }
+
+
+// const spinner = (condition) => {
+//     document.getElementById("spinner").style.display = condition;
+// };
